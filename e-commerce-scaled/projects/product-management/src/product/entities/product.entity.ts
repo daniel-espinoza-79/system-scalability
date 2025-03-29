@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import PrismaBrand from '@/brand/entities/prisma-brand.entity';
 import PrismaCategory from '@/category/entities/prisma-category.entity';
 import ProductImage from '@/product-image/entities/product-image.entity';
+import SuppliersOnly from '@/products-suppliers/entities/suppliers-only.entity';
 
 class Product {
   @ApiProperty({
@@ -96,6 +97,13 @@ class Product {
     description: 'Images associated with the product',
   })
   readonly productImages: ProductImage[];
+
+  @ApiProperty({
+    type: () => SuppliersOnly,
+    isArray: true,
+    description: 'Suppliers associated with the product',
+  })
+  readonly productsSuppliers: SuppliersOnly[];
 }
 
 export default Product;

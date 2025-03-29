@@ -26,7 +26,7 @@ async function main() {
         const document = swagger_1.SwaggerModule.createDocument(app, config);
         swagger_1.SwaggerModule.setup(constants_1.PREFIX, app, document);
     }
-    await app.listen(3000);
+    await app.listen(constants_1.PORT);
 }
 main().catch((err) => {
     throw new Error(err.message);

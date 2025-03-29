@@ -8,6 +8,8 @@ import CategoryModule from './category/category.module';
 import CountryModule from './country/country.module';
 import ProductImageModule from './product-image/product-image.module';
 import ProductModule from './product/product.module';
+import ProductsSuppliersModule from './products-suppliers/products-suppliers.module';
+import SupplierModule from './supplier/supplier.module';
 
 @Module({
   imports: [
@@ -15,10 +17,12 @@ import ProductModule from './product/product.module';
       rootPath: join(__dirname, '../../../client/dist'),
     }),
     CountryModule,
+    SupplierModule,
     BrandModule,
     CategoryModule,
     ProductModule,
     ProductImageModule,
+    ProductsSuppliersModule,
   ],
 })
 class AppModule {}

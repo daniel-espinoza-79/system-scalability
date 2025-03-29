@@ -13,6 +13,7 @@ const swagger_1 = require("@nestjs/swagger");
 const prisma_brand_entity_1 = require("../../brand/entities/prisma-brand.entity");
 const prisma_category_entity_1 = require("../../category/entities/prisma-category.entity");
 const product_image_entity_1 = require("../../product-image/entities/product-image.entity");
+const suppliers_only_entity_1 = require("../../products-suppliers/entities/suppliers-only.entity");
 class Product {
 }
 __decorate([
@@ -120,5 +121,13 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], Product.prototype, "productImages", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        type: () => suppliers_only_entity_1.default,
+        isArray: true,
+        description: 'Suppliers associated with the product',
+    }),
+    __metadata("design:type", Array)
+], Product.prototype, "productsSuppliers", void 0);
 exports.default = Product;
 //# sourceMappingURL=product.entity.js.map

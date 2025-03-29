@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import AppModule from './app.module';
 import CORS from './config/cors.config';
-import { DESCRIPTION, ENV, PREFIX, TITLE, VERSION } from './utils/constants';
+import { DESCRIPTION, ENV, PORT, PREFIX, TITLE, VERSION } from './utils/constants';
 
 async function main() {
   const app = await NestFactory.create(AppModule, {
@@ -31,7 +31,7 @@ async function main() {
     SwaggerModule.setup(PREFIX, app, document);
   }
 
-  await app.listen(3000);
+  await app.listen(PORT);
 }
 
 main().catch((err: Error) => {

@@ -7,16 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  USER
-}
-
-enum PurchaseStatus {
-  IN_COMING
-  PENDING
-  CANCELED
-}
 
 model Country {
   id        String     @id @default(uuid()) @db.Uuid()
@@ -64,61 +54,6 @@ model Supplier {
   @@map(name: "suppliers")
 }
 
-model User {
-  id            String          @id @default(uuid()) @db.Uuid()
-  name          String
-  lastName      String          @map(name: "last_name")
-  email         String          @unique @db.Citext
-  password      String
-  role          Role
-  createdAt     DateTime        @default(now()) @map(name: "created_at") @db.Timestamptz()
-  updatedAt     DateTime        @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  penalty       Penalty?
-  wishList      WishList?
-  purchases     Purchase[]
-  usersProducts UsersProducts[]
-
-  @@map(name: "users")
-}
-
-model Penalty {
-  id        String   @id @default(uuid()) @db.Uuid()
-  amount    Int      @default(0)
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  userId    String   @unique @map(name: "user_id") @db.Uuid()
-  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-
-  @@map(name: "penalties")
-}
-
-model WishList {
-  id                String              @id @default(uuid()) @db.Uuid()
-  title             String              @default("My WishList")
-  description       String              @default("")
-  createdAt         DateTime            @default(now()) @map(name: "created_at") @db.Timestamptz()
-  updatedAt         DateTime            @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  userId            String              @unique @map(name: "user_id") @db.Uuid()
-  user              User                @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  wishListsProducts WishListsProducts[]
-
-  @@map(name: "wish_lists")
-}
-
-model Purchase {
-  id                String              @id @default(uuid()) @db.Uuid()
-  totalCost         Float               @map(name: "total_cost")
-  deliveyDay        DateTime            @map(name: "delivery_day")
-  deadline          DateTime
-  status            PurchaseStatus
-  createdAt         DateTime            @default(now()) @map(name: "created_at") @db.Timestamptz()
-  updatedAt         DateTime            @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  userId            String              @map(name: "user_id") @db.Uuid()
-  user              User                @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  purchasesProducts PurchasesProducts[]
-
-  @@map(name: "purchases")
-}
 
 model Product {
   id                String              @id @default(uuid()) @db.Uuid()
@@ -135,9 +70,6 @@ model Product {
   brand             Brand               @relation(fields: [brandId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   productImages     ProductImage[]
   productsSuppliers ProductsSuppliers[]
-  wishListsProducts WishListsProducts[]
-  usersProducts     UsersProducts[]
-  purchasesProducts PurchasesProducts[]
 
   @@map(name: "products")
 }
@@ -164,40 +96,4 @@ model ProductsSuppliers {
   @@map(name: "products_suppliers")
 }
 
-model WishListsProducts {
-  wishListId String   @map(name: "wish_list_id") @db.Uuid()
-  productId  String   @map(name: "product_id") @db.Uuid()
-  createdAt  DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
-  wishList   WishList @relation(fields: [wishListId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  @@id([wishListId, productId])
-  @@map("wish_lists_products")
-}
-
-model UsersProducts {
-  userId    String   @map(name: "user_id") @db.Uuid()
-  productId String   @map(name: "product_id") @db.Uuid()
-  rating    Int
-  comment   String
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
-  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-
-  @@id([userId, productId])
-  @@map(name: "users_products")
-}
-
-model PurchasesProducts {
-  purchaseId String   @map(name: "purchase_id") @db.Uuid()
-  productId  String   @map(name: "product_id") @db.Uuid()
-  quantity   Int
-  createdAt  DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
-  updatedAt  DateTime @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-
-  @@id([purchaseId, productId])
-  @@map(name: "purchases_products")
-}

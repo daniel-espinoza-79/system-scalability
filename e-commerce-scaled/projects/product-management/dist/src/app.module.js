@@ -14,6 +14,8 @@ const category_module_1 = require("./category/category.module");
 const country_module_1 = require("./country/country.module");
 const product_image_module_1 = require("./product-image/product-image.module");
 const product_module_1 = require("./product/product.module");
+const products_suppliers_module_1 = require("./products-suppliers/products-suppliers.module");
+const supplier_module_1 = require("./supplier/supplier.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23,10 +25,12 @@ AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '../../../client/dist'),
             }),
             country_module_1.default,
+            supplier_module_1.default,
             brand_module_1.default,
             category_module_1.default,
             product_module_1.default,
             product_image_module_1.default,
+            products_suppliers_module_1.default,
         ],
     })
 ], AppModule);

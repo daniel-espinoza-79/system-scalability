@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {  ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+
 
 import BrandService from './brand.service';
 import CreateBrandDto from './dto/create-brand.dto';
@@ -12,7 +13,6 @@ class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
   @Post()
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new brand' })
   @ApiCreatedResponse({ type: Brand })
   async create(@Body() createBrandDto: CreateBrandDto): Promise<Brand> {
