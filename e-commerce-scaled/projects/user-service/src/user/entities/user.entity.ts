@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Penalty, Purchase, Role, UsersProducts, WishList } from '@prisma/client';
+import { Penalty, Role } from '@prisma/client';
 
 class User {
   @ApiProperty({
@@ -63,23 +63,6 @@ class User {
     description: 'The penalty of the user',
   })
   readonly penalty: Penalty;
-
-  @ApiProperty({
-    description: 'The wish list of the user',
-  })
-  readonly wishList: WishList;
-
-  @ApiProperty({
-    isArray: true,
-    description: 'The purchases of the user',
-  })
-  readonly purchases: Purchase[];
-
-  @ApiProperty({
-    isArray: true,
-    description: 'The users products of the user',
-  })
-  readonly usersProducts: UsersProducts[];
 }
 
 export default User;
