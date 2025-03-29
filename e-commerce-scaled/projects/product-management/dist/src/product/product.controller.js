@@ -13,34 +13,35 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const cqrs_1 = require("@nestjs/cqrs");
 const swagger_1 = require("@nestjs/swagger");
+const create_product_command_1 = require("./commands/create/create-product.command");
+const delete_product_command_1 = require("./commands/delete/delete-product.command");
+const update_product_command_1 = require("./commands/update/update-product.command");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const update_product_dto_1 = require("./dto/update-product.dto");
 const product_entity_1 = require("./entities/product.entity");
-const product_service_1 = require("./product.service");
+const get_products_query_1 = require("./queries/get-all/get-products.query");
+const get_product_query_1 = require("./queries/get-by-id/get-product.query");
 let ProductController = class ProductController {
-    constructor(productService) {
-        this.productService = productService;
+    constructor(commandBus, queryBus) {
+        this.commandBus = commandBus;
+        this.queryBus = queryBus;
     }
     async create(createProductDto) {
-        const product = await this.productService.create(createProductDto);
-        return product;
+        return this.commandBus.execute(new create_product_command_1.default(createProductDto));
     }
     async findAll() {
-        const product = await this.productService.findAll();
-        return product;
+        return this.queryBus.execute(new get_products_query_1.default());
     }
     async findOne(id) {
-        const product = await this.productService.findOne(id);
-        return product;
+        return this.queryBus.execute(new get_product_query_1.default(id));
     }
     async update(id, updateProductDto) {
-        const product = await this.productService.update(id, updateProductDto);
-        return product;
+        return this.commandBus.execute(new update_product_command_1.default(id, updateProductDto));
     }
     async remove(id) {
-        const product = await this.productService.remove(id);
-        return product;
+        return this.commandBus.execute(new delete_product_command_1.default(id));
     }
 };
 __decorate([
@@ -91,7 +92,8 @@ __decorate([
 ProductController = __decorate([
     (0, common_1.Controller)('product'),
     (0, swagger_1.ApiTags)('Product'),
-    __metadata("design:paramtypes", [product_service_1.default])
+    __metadata("design:paramtypes", [cqrs_1.CommandBus,
+        cqrs_1.QueryBus])
 ], ProductController);
 exports.default = ProductController;
 //# sourceMappingURL=product.controller.js.map

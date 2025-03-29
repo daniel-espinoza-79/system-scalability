@@ -1,0 +1,1 @@
+{"version":3,"file":"update-product.command.js","sourceRoot":"","sources":["../../../../../src/product/commands/update/update-product.command.ts"],"names":[],"mappings":";;AAIA,MAAM,oBAAoB;IACxB,YACkB,EAAU,EACV,gBAAkC;QADlC,OAAE,GAAF,EAAE,CAAQ;QACV,qBAAgB,GAAhB,gBAAgB,CAAkB;IACjD,CAAC;CACL;AAED,kBAAe,oBAAoB,CAAC"}
