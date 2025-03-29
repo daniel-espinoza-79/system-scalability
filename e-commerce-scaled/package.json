@@ -59,14 +59,7 @@
     "branches": [
       "main"
     ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/git",
-      "@semantic-release/github"
-    ]
+    "plugins": []
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -77,7 +70,6 @@
     "schema": "./projects/api/prisma/schema.prisma"
   },
   "scripts": {
-    "prepare": "husky install",
     "postinstall": "pnpm -F=api prisma:generate",
     "dev": "docker compose down && docker volume rm --force llama-gamer_postgres-data && docker compose up -d && pnpm -F=api prisma && pnpm --parallel dev",
     "check:code": "pnpm --parallel lint && pnpm --parallel format",
@@ -87,13 +79,5 @@
     "start:dev": "DATABASE_URL=\"postgresql://user:password@localhost:3030/llama_gamer_db\" node projects/api/dist/src/main.js"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^11.1.0",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.2.3",
-    "@semantic-release/npm": "^11.0.1",
-    "@semantic-release/release-notes-generator": "^12.1.0",
-    "husky": "^8.0.3",
-    "semantic-release": "^22.0.8"
   }
 }
