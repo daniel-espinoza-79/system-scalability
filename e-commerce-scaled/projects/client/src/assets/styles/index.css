@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 100;
+    font-style: normal;
+    src: url('/src/assets/fonts/roboto-thin.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 100;
+    font-style: italic;
+    src: url('/src/assets/fonts/roboto-thin-italic.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 300;
+    font-style: normal;
+    src: url('/src/assets/fonts/roboto-light.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 300;
+    font-style: italic;
+    src: url('/src/assets/fonts/roboto-light-italic.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 400;
+    font-style: normal;
+    src: url('/src/assets/fonts/roboto-regular.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 400;
+    font-style: italic;
+    src: url('/src/assets/fonts/roboto-italic.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 500;
+    font-style: normal;
+    src: url('/src/assets/fonts/roboto-medium.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 500;
+    font-style: italic;
+    src: url('/src/assets/fonts/roboto-medium-italic.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 700;
+    font-style: normal;
+    src: url('/src/assets/fonts/roboto-bold.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 700;
+    font-style: italic;
+    src: url('/src/assets/fonts/roboto-bold-italic.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 900;
+    font-style: normal;
+    src: url('/src/assets/fonts/roboto-black.ttf');
+  }
+  @font-face {
+    font-family: 'roboto';
+    font-weight: 900;
+    font-style: italic;
+    src: url('/src/assets/fonts/roboto-black-italic.ttf');
+  }
+}
+
+* {
+  font-family: 'roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+figcaption {
+  view-transition-name: figure-caption;
+}
+
+select {
+  border-right: 16px solid transparent;
+}
+
+.container-class {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
