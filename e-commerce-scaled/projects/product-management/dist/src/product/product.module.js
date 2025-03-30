@@ -14,23 +14,13 @@ const delete_product_handler_1 = require("./commands/delete/delete-product.handl
 const update_product_handler_1 = require("./commands/update/update-product.handler");
 const product_controller_1 = require("./product.controller");
 const product_service_1 = require("./product.service");
-const get_products_handler_1 = require("./queries/get-all/get-products.handler");
-const get_product_handler_1 = require("./queries/get-by-id/get-product.handler");
 let ProductModule = class ProductModule {
 };
 ProductModule = __decorate([
     (0, common_1.Module)({
         imports: [cqrs_1.CqrsModule],
         controllers: [product_controller_1.default],
-        providers: [
-            product_service_1.default,
-            prisma_service_1.default,
-            create_product_handler_1.default,
-            update_product_handler_1.default,
-            delete_product_handler_1.default,
-            get_product_handler_1.default,
-            get_products_handler_1.default,
-        ],
+        providers: [product_service_1.default, prisma_service_1.default, create_product_handler_1.default, update_product_handler_1.default, delete_product_handler_1.default],
     })
 ], ProductModule);
 exports.default = ProductModule;

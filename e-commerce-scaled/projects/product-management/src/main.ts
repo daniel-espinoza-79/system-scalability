@@ -1,5 +1,6 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import AppModule from './app.module';
@@ -10,7 +11,12 @@ async function main() {
   const app = await NestFactory.create(AppModule, {
     snapshot: true,
   });
-
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.NATS,
+    options: {
+      servers: ['nats://localhost:4222'],
+    },
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -30,7 +36,7 @@ async function main() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup(PREFIX, app, document);
   }
-
+  await app.startAllMicroservices();
   await app.listen(PORT);
 }
 

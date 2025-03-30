@@ -26,14 +26,6 @@ let BrandController = class BrandController {
         const brand = await this.brandService.create(createBrandDto);
         return brand;
     }
-    async findAll() {
-        const brands = await this.brandService.findAll();
-        return brands;
-    }
-    async findOne(id) {
-        const brand = await this.brandService.findOne(id);
-        return brand;
-    }
     async update(id, updateBrandDto) {
         const brand = await this.brandService.update(id, updateBrandDto);
         return brand;
@@ -52,23 +44,6 @@ __decorate([
     __metadata("design:paramtypes", [create_brand_dto_1.default]),
     __metadata("design:returntype", Promise)
 ], BrandController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all brands' }),
-    (0, swagger_1.ApiCreatedResponse)({ type: brand_entity_1.default, isArray: true }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], BrandController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get a brand by id' }),
-    (0, swagger_1.ApiCreatedResponse)({ type: brand_entity_1.default }),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], BrandController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Update a brand by id' }),

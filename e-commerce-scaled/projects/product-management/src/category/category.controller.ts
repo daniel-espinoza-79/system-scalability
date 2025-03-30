@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import {  ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import CategoryService from './category.service';
 import CreateCategoryDto from './dto/create-category.dto';
@@ -17,22 +16,6 @@ class CategoryController {
   @ApiCreatedResponse({ type: Category })
   async create(@Body() createCategoryDto: CreateCategoryDto): Promise<Category> {
     const category: Category = await this.categoryService.create(createCategoryDto);
-    return category;
-  }
-
-  @Get()
-  @ApiOperation({ summary: 'Get all categories' })
-  @ApiCreatedResponse({ type: Category, isArray: true })
-  async findAll(): Promise<Category[]> {
-    const categories: Category[] = await this.categoryService.findAll();
-    return categories;
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Get a category by id' })
-  @ApiCreatedResponse({ type: Category })
-  async findOne(@Param('id') id: string): Promise<Category> {
-    const category: Category = await this.categoryService.findOne(id);
     return category;
   }
 

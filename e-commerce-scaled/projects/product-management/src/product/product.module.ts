@@ -1,18 +1,20 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
+import BrandModule from '@/brand/brand.module';
+import CategoryModule from '@/category/category.module';
 import PrismaService from '@/prisma/prisma.service';
 
 import CreateProductHandler from './commands/create/create-product.handler';
 import DeleteProductHandler from './commands/delete/delete-product.handler';
 import UpdateProductHandler from './commands/update/update-product.handler';
 import ProductController from './product.controller';
+import ProductMapping from './product.mapping';
 import ProductService from './product.service';
-import GetProductsHandler from './queries/get-all/get-products.handler';
-import GetProductHandler from './queries/get-by-id/get-product.handler';
+import ProductPublisherService from './product-events.publisher';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, CategoryModule, BrandModule],
   controllers: [ProductController],
   providers: [
     ProductService,
@@ -20,8 +22,8 @@ import GetProductHandler from './queries/get-by-id/get-product.handler';
     CreateProductHandler,
     UpdateProductHandler,
     DeleteProductHandler,
-    GetProductHandler,
-    GetProductsHandler,
+    ProductPublisherService,
+    ProductMapping,
   ],
 })
 export default class ProductModule {}

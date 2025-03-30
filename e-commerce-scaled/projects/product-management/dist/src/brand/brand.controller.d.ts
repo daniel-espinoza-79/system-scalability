@@ -6,8 +6,6 @@ declare class BrandController {
     private readonly brandService;
     constructor(brandService: BrandService);
     create(createBrandDto: CreateBrandDto): Promise<Brand>;
-    findAll(): Promise<Brand[]>;
-    findOne(id: string): Promise<Brand>;
     update(id: string, updateBrandDto: UpdateBrandDto): Promise<Brand>;
     remove(id: string): Promise<Brand>;
 }

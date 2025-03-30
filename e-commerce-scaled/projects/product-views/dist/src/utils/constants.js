@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DB_URL = exports.VERSION = exports.TITLE = exports.PUBLIC_KEY = exports.PREFIX = exports.PORT = exports.HASH_SALT = exports.ENV = exports.DESCRIPTION = exports.ADMIN_KEY = void 0;
+const ADMIN_KEY = "admin";
+exports.ADMIN_KEY = ADMIN_KEY;
+const DESCRIPTION = "The Llama Gamer E Commerce API is a RESTful API that allows you to manage the products, brands, categories, countries, and users of the Llama Gamer E Commerce application.";
+exports.DESCRIPTION = DESCRIPTION;
+const ENV = process.env.ENV ?? "development";
+exports.ENV = ENV;
+const HASH_SALT = 10;
+exports.HASH_SALT = HASH_SALT;
+const PORT = process.env.PORT ?? 3000;
+exports.PORT = PORT;
+const PREFIX = "/api";
+exports.PREFIX = PREFIX;
+const PUBLIC_KEY = "public";
+exports.PUBLIC_KEY = PUBLIC_KEY;
+const TITLE = "The Llama Gamer E Commerce API";
+exports.TITLE = TITLE;
+const VERSION = "1.0";
+exports.VERSION = VERSION;
+const DB_URL = "mongodb://root:example@localhost:27017/productsdb";
+exports.DB_URL = DB_URL;
+//# sourceMappingURL=constants.js.map

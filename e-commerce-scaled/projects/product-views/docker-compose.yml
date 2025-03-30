@@ -1,0 +1,12 @@
+version: "3.8"
+services: 
+  mongodb:
+    image: mongo:latest
+    container_name: llama_gamer_mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: productsdb
+    ports:
+      - 27017:27017

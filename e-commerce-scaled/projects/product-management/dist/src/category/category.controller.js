@@ -26,14 +26,6 @@ let CategoryController = class CategoryController {
         const category = await this.categoryService.create(createCategoryDto);
         return category;
     }
-    async findAll() {
-        const categories = await this.categoryService.findAll();
-        return categories;
-    }
-    async findOne(id) {
-        const category = await this.categoryService.findOne(id);
-        return category;
-    }
     async update(id, updateCategoryDto) {
         const updatedCategory = await this.categoryService.update(id, updateCategoryDto);
         return updatedCategory;
@@ -52,23 +44,6 @@ __decorate([
     __metadata("design:paramtypes", [create_category_dto_1.default]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all categories' }),
-    (0, swagger_1.ApiCreatedResponse)({ type: category_entity_1.default, isArray: true }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], CategoryController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get a category by id' }),
-    (0, swagger_1.ApiCreatedResponse)({ type: category_entity_1.default }),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], CategoryController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Update a category by id' }),

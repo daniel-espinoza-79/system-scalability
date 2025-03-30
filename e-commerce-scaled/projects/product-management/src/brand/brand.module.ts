@@ -8,6 +8,7 @@ import BrandService from './brand.service';
 @Module({
   controllers: [BrandController],
   providers: [BrandService, PrismaService],
+  exports: [BrandService],
 })
 class BrandModule {}
 export default BrandModule;

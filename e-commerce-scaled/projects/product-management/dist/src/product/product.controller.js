@@ -21,21 +21,12 @@ const update_product_command_1 = require("./commands/update/update-product.comma
 const create_product_dto_1 = require("./dto/create-product.dto");
 const update_product_dto_1 = require("./dto/update-product.dto");
 const product_entity_1 = require("./entities/product.entity");
-const get_products_query_1 = require("./queries/get-all/get-products.query");
-const get_product_query_1 = require("./queries/get-by-id/get-product.query");
 let ProductController = class ProductController {
-    constructor(commandBus, queryBus) {
+    constructor(commandBus) {
         this.commandBus = commandBus;
-        this.queryBus = queryBus;
     }
     async create(createProductDto) {
         return this.commandBus.execute(new create_product_command_1.default(createProductDto));
-    }
-    async findAll() {
-        return this.queryBus.execute(new get_products_query_1.default());
-    }
-    async findOne(id) {
-        return this.queryBus.execute(new get_product_query_1.default(id));
     }
     async update(id, updateProductDto) {
         return this.commandBus.execute(new update_product_command_1.default(id, updateProductDto));
@@ -53,23 +44,6 @@ __decorate([
     __metadata("design:paramtypes", [create_product_dto_1.default]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all products' }),
-    (0, swagger_1.ApiCreatedResponse)({ type: product_entity_1.default, isArray: true }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], ProductController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get a product by id' }),
-    (0, swagger_1.ApiCreatedResponse)({ type: product_entity_1.default }),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], ProductController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Update a product by id' }),
@@ -92,8 +66,7 @@ __decorate([
 ProductController = __decorate([
     (0, common_1.Controller)('product'),
     (0, swagger_1.ApiTags)('Product'),
-    __metadata("design:paramtypes", [cqrs_1.CommandBus,
-        cqrs_1.QueryBus])
+    __metadata("design:paramtypes", [cqrs_1.CommandBus])
 ], ProductController);
 exports.default = ProductController;
 //# sourceMappingURL=product.controller.js.map
