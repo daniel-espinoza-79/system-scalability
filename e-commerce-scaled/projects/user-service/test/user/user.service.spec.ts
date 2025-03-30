@@ -60,9 +60,6 @@ describe('UserService', () => {
         data: { ...createUserDto, password: hashedPassword },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
       expect(result).toEqual({} as any);
@@ -87,9 +84,6 @@ describe('UserService', () => {
         data: { ...createUserDto, password: 'hashedPasswordMock' },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
     });
@@ -113,9 +107,6 @@ describe('UserService', () => {
         data: { ...createUserDto, password: 'hashedPasswordMock' },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
     });
@@ -135,9 +126,6 @@ describe('UserService', () => {
         },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
       expect(result).toEqual(users);
@@ -159,9 +147,6 @@ describe('UserService', () => {
         },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
       expect(result).toEqual(user);
@@ -182,9 +167,6 @@ describe('UserService', () => {
         },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
     });
@@ -207,9 +189,6 @@ describe('UserService', () => {
         data: updateUserDto,
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
       expect(result).toEqual(user);
@@ -230,9 +209,6 @@ describe('UserService', () => {
         data: updateUserDto,
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
     });
@@ -252,9 +228,6 @@ describe('UserService', () => {
         data: updateUserDto,
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
     });
@@ -275,9 +248,6 @@ describe('UserService', () => {
         },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
       expect(result).toEqual(user);
@@ -299,9 +269,6 @@ describe('UserService', () => {
         },
         include: {
           penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
         },
       });
       expect(result).toEqual(user);

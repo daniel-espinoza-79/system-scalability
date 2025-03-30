@@ -51,9 +51,6 @@ describe('UserController', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         penalty: null,
-        wishList: null,
-        purchases: [],
-        usersProducts: [],
       };
 
       jest.spyOn(userService, 'create').mockResolvedValue(createdUser);
@@ -107,9 +104,6 @@ describe('UserController', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         penalty: null,
-        wishList: null,
-        purchases: [],
-        usersProducts: [],
       };
 
       jest.spyOn(userService, 'findOne').mockResolvedValue(user);
@@ -142,9 +136,6 @@ describe('UserController', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         penalty: null,
-        wishList: null,
-        purchases: [],
-        usersProducts: [],
       };
 
       jest.spyOn(userService, 'update').mockResolvedValue(updatedUser);
@@ -170,9 +161,6 @@ describe('UserController', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         penalty: null,
-        wishList: null,
-        purchases: [],
-        usersProducts: [],
       };
 
       jest.spyOn(userService, 'remove').mockResolvedValue(removedUser);
