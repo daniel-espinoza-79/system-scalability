@@ -5,9 +5,9 @@ const { migrateSuppliersData } = require("./suppliers.migration");
 
 async function main() {
   await migrateBrandsData();
-  //await migrateCategoriesData();
-  //await migrateProductsData();
-  //await migrateSuppliersData();
+  await migrateCategoriesData();
+  await migrateProductsData();
+  await migrateSuppliersData();
 }
 
 main();
