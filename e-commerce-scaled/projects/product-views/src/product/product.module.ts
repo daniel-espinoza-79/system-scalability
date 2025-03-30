@@ -7,6 +7,7 @@ import { ProductsService } from "./product.service";
 import { ProductCreatedHandler } from "./commands/create/product-created.handler";
 import { ProductUpdatedHandler } from "./commands/update/product-updated.handler";
 import { ProductDeletedHandler } from "./commands/delete/product-deleted.handler";
+import UpdateStocksCommandHandler from "./commands/update-stocks/update-stocks.handler";
 
 import GetProductsHandler from "./queries/get-all/get-products.handler";
 import GetProductHandler from "./queries/get-by-id/get-product.handler";
@@ -29,6 +30,7 @@ import BrandModule from "@/brand/brand.module";
     GetProductsHandler,
     ProductCreatedHandler,
     ProductUpdatedHandler,
+    UpdateStocksCommandHandler,
     ProductDeletedHandler,
   ],
 })

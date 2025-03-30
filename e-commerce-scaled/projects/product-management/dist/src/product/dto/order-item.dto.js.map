@@ -1,0 +1,1 @@
+{"version":3,"file":"order-item.dto.js","sourceRoot":"","sources":["../../../../src/product/dto/order-item.dto.ts"],"names":[],"mappings":";;AAAA,MAAM,SAAS;IAOb,YAAY,EAAU,EAAE,KAAa,EAAE,KAAc;QACnD,IAAI,CAAC,EAAE,GAAG,EAAE,CAAC;QACb,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACnB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACrB,CAAC;CACF;AAED,kBAAe,SAAS,CAAC"}

@@ -10,7 +10,6 @@ import {
 } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiCreatedResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { Product } from "./schemas/product.schema";
 import GetProductsQuery from "./queries/get-all/get-products.query";
 import GetProductQuery from "./queries/get-by-id/get-product.query";
 import { ProductDto } from "./dtos/product.dto";
@@ -20,6 +19,8 @@ import { MessagePattern, Payload } from "@nestjs/microservices";
 import { ProductCreatedCommand } from "./commands/create/product-created.command";
 import { ProductUpdatedCommand } from "./commands/update/product-updated.command";
 import { ProductDeletedCommand } from "./commands/delete/product-deleted.command";
+import OrderItem from "./dtos/order-item.dto";
+import UpdateStocksCommand from "./commands/update-stocks/update-stocks.command";
 @Controller("product")
 @ApiTags("Product")
 class ProductController {
@@ -55,6 +56,11 @@ class ProductController {
   @MessagePattern("product.deleted")
   async handleDeleteProduct(@Payload() { id }: { id: string }) {
     await this.commandBus.execute(new ProductDeletedCommand(id));
+  }
+
+  @MessagePattern("product.stock-updated")
+  async handleStockUpdate(@Payload() orderItems: OrderItem[]) {
+    await this.commandBus.execute(new UpdateStocksCommand(orderItems));
   }
 }
 export default ProductController;

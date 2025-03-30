@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const brand_schema_1 = require("./brand.schema");
+const brand_dto_1 = require("./brand.dto");
 let BrandsService = class BrandsService {
     constructor(brandModel) {
         this.brandModel = brandModel;
@@ -26,10 +27,24 @@ let BrandsService = class BrandsService {
         return createdBrand.save();
     }
     async findAll() {
-        return await this.brandModel.find().lean().exec();
+        const brands = await this.brandModel.find().lean().exec();
+        return brands.map((b) => new brand_dto_1.default(b.id, b.name, b.products));
     }
     async findById(id) {
-        return await this.brandModel.findOne({ id: id }).lean().exec();
+        const brand = await this.brandModel.findOne({ id: id }).lean().exec();
+        return new brand_dto_1.default(brand.id, brand.name, brand.products);
+    }
+    async findByName(name) {
+        return await this.brandModel.findOne({ name: name }).lean().exec();
+    }
+    async update(id, updateBrandDto) {
+        const updatedBrand = await this.brandModel
+            .findOneAndUpdate({ id: id }, updateBrandDto, {
+            new: true,
+        })
+            .lean()
+            .exec();
+        return updatedBrand;
     }
 };
 exports.BrandsService = BrandsService;

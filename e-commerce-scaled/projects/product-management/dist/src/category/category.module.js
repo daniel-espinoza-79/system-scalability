@@ -16,6 +16,7 @@ CategoryModule = __decorate([
     (0, common_1.Module)({
         controllers: [category_controller_1.default],
         providers: [category_service_1.default, prisma_service_1.default],
+        exports: [category_service_1.default],
     })
 ], CategoryModule);
 exports.default = CategoryModule;

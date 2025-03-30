@@ -44,6 +44,25 @@ let ProductsService = class ProductsService {
     async findById(id) {
         return await this.productModel.findOne({ id: id }).exec();
     }
+    async delete(id) {
+        return await this.productModel.findOneAndDelete({ id: id }).exec();
+    }
+    async update(id, updateProductDto) {
+        return await this.productModel
+            .findOneAndUpdate({ id: id }, updateProductDto, {
+            new: true,
+        })
+            .exec();
+    }
+    async bulkUpdateStock(products) {
+        const bulkOps = products.map((product) => ({
+            updateOne: {
+                filter: { id: product.id },
+                update: { $set: { stock: product.stock } },
+            },
+        }));
+        return await this.productModel.bulkWrite(bulkOps);
+    }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([

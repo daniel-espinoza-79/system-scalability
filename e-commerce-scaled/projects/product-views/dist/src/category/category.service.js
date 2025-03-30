@@ -17,19 +17,29 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const category_schema_1 = require("./category.schema");
+const category_dto_1 = require("./category.dto");
 let CategoriesService = class CategoriesService {
     constructor(categoryModel) {
         this.categoryModel = categoryModel;
     }
     async create(createCategoryDto) {
         const createdCategory = new this.categoryModel(createCategoryDto);
-        return createdCategory.save();
+        let cat = await createdCategory.save();
+        return new category_dto_1.default(cat.id, cat.name, cat.image);
     }
     async findAll() {
-        return await this.categoryModel.find().lean().exec();
+        const categories = await this.categoryModel
+            .find()
+            .lean()
+            .exec();
+        return categories.map((c) => new category_dto_1.default(c.id, c.name, c.image));
     }
     async findById(id) {
-        return await this.categoryModel.findOne({ id: id }).lean().exec();
+        const category = await this.categoryModel
+            .findOne({ id: id })
+            .lean()
+            .exec();
+        return new category_dto_1.default(category.id, category.name, category.image);
     }
 };
 exports.CategoriesService = CategoriesService;

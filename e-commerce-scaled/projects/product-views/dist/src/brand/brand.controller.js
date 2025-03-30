@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const brand_service_1 = require("./brand.service");
-const brand_schema_1 = require("./brand.schema");
+const brand_dto_1 = require("./brand.dto");
 let BrandController = class BrandController {
     constructor(brandService) {
         this.brandService = brandService;
@@ -32,7 +32,7 @@ let BrandController = class BrandController {
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: "Get all brands" }),
-    (0, swagger_1.ApiCreatedResponse)({ type: brand_schema_1.Brand, isArray: true }),
+    (0, swagger_1.ApiCreatedResponse)({ type: brand_dto_1.default, isArray: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -40,7 +40,7 @@ __decorate([
 __decorate([
     (0, common_1.Get)(":id"),
     (0, swagger_1.ApiOperation)({ summary: "Get a brand by id" }),
-    (0, swagger_1.ApiCreatedResponse)({ type: brand_schema_1.Brand }),
+    (0, swagger_1.ApiCreatedResponse)({ type: brand_dto_1.default }),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

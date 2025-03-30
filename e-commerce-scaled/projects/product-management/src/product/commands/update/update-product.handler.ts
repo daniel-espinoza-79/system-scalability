@@ -18,7 +18,9 @@ class UpdateProductHandler implements ICommandHandler<UpdateProductCommand> {
   async execute(command: UpdateProductCommand): Promise<Product> {
     await this.productService.update(command.id, command.updateProductDto);
     const product = await this.productService.findOne(command.id);
-    this.publisher.publishProductUpdated(this.mapping.mapToSimpleProduct(product));
+    this.publisher.publishProductUpdated(
+      this.mapping.mapToSimpleProduct(product, product.category.name, product.brand.name)
+    );
     return product;
   }
 }

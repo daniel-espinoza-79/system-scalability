@@ -26,10 +26,14 @@
 import { Model } from "mongoose";
 import { Product } from "./schemas/product.schema";
 import { QueryProductDto } from "./dtos/query-product.dto";
+import OrderItem from "./dtos/order-item.dto";
 export declare class ProductsService {
     private productModel;
     constructor(productModel: Model<Product>);
     create(createProductDto: any): Promise<Product>;
     findAll(query: QueryProductDto): Promise<Product[]>;
     findById(id: string): Promise<Product>;
+    delete(id: string): Promise<Product>;
+    update(id: string, updateProductDto: any): Promise<Product>;
+    bulkUpdateStock(products: OrderItem[]): Promise<any>;
 }

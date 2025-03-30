@@ -10,19 +10,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cqrs_1 = require("@nestjs/cqrs");
+const brand_service_1 = require("../../../brand/brand.service");
+const category_service_1 = require("../../../category/category.service");
+const product_mapping_1 = require("../../product.mapping");
+const product_events_publisher_1 = require("../../product-events.publisher");
 const product_service_1 = require("../../product.service");
 const create_product_command_1 = require("./create-product.command");
 let CreateProductHandler = class CreateProductHandler {
-    constructor(productService) {
+    constructor(productService, publisher, categoryService, brandService, productMapping) {
         this.productService = productService;
+        this.publisher = publisher;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
+        this.productMapping = productMapping;
     }
     async execute(command) {
-        return this.productService.create(command.createProductDto);
+        const product = await this.productService.create(command.createProductDto);
+        const category = await this.categoryService.findOne(product.categoryId);
+        const brand = await this.brandService.findOne(product.brandId);
+        this.publisher.publishProductCreated(this.productMapping.mapToSimpleProduct(product, category.name, brand.name));
+        return product;
     }
 };
 CreateProductHandler = __decorate([
     (0, cqrs_1.CommandHandler)(create_product_command_1.default),
-    __metadata("design:paramtypes", [product_service_1.default])
+    __metadata("design:paramtypes", [product_service_1.default,
+        product_events_publisher_1.default,
+        category_service_1.default,
+        brand_service_1.default,
+        product_mapping_1.default])
 ], CreateProductHandler);
 exports.default = CreateProductHandler;
 //# sourceMappingURL=create-product.handler.js.map

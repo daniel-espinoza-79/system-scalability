@@ -20,6 +20,11 @@ const get_product_query_1 = require("./queries/get-by-id/get-product.query");
 const product_dto_1 = require("./dtos/product.dto");
 const simple_product_1 = require("./dtos/simple-product");
 const query_product_dto_1 = require("./dtos/query-product.dto");
+const microservices_1 = require("@nestjs/microservices");
+const product_created_command_1 = require("./commands/create/product-created.command");
+const product_updated_command_1 = require("./commands/update/product-updated.command");
+const product_deleted_command_1 = require("./commands/delete/product-deleted.command");
+const update_stocks_command_1 = require("./commands/update-stocks/update-stocks.command");
 let ProductController = class ProductController {
     constructor(commandBus, queryBus) {
         this.commandBus = commandBus;
@@ -30,6 +35,18 @@ let ProductController = class ProductController {
     }
     async findOne(id) {
         return this.queryBus.execute(new get_product_query_1.default(id));
+    }
+    async handleProductCreated(product) {
+        await this.commandBus.execute(new product_created_command_1.ProductCreatedCommand(product));
+    }
+    async handleUpdateProduct(product) {
+        await this.commandBus.execute(new product_updated_command_1.ProductUpdatedCommand(product));
+    }
+    async handleDeleteProduct({ id }) {
+        await this.commandBus.execute(new product_deleted_command_1.ProductDeletedCommand(id));
+    }
+    async handleStockUpdate(orderItems) {
+        await this.commandBus.execute(new update_stocks_command_1.default(orderItems));
     }
 };
 __decorate([
@@ -50,6 +67,34 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findOne", null);
+__decorate([
+    (0, microservices_1.MessagePattern)("product.created"),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [simple_product_1.SimpleProductDto]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "handleProductCreated", null);
+__decorate([
+    (0, microservices_1.MessagePattern)("product.updated"),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [simple_product_1.SimpleProductDto]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "handleUpdateProduct", null);
+__decorate([
+    (0, microservices_1.MessagePattern)("product.deleted"),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "handleDeleteProduct", null);
+__decorate([
+    (0, microservices_1.MessagePattern)("product.stock-updated"),
+    __param(0, (0, microservices_1.Payload)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "handleStockUpdate", null);
 ProductController = __decorate([
     (0, common_1.Controller)("product"),
     (0, swagger_1.ApiTags)("Product"),

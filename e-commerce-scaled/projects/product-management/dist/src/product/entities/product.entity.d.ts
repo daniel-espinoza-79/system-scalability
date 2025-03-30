@@ -6,7 +6,7 @@ declare class Product {
     readonly id: string;
     readonly name: string;
     readonly description: string;
-    readonly stock: number;
+    stock: number;
     readonly price: number;
     readonly isAvailable: boolean;
     readonly createdAt: Date;

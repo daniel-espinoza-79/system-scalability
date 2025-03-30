@@ -8,6 +8,7 @@ import PrismaService from '@/prisma/prisma.service';
 import CreateProductHandler from './commands/create/create-product.handler';
 import DeleteProductHandler from './commands/delete/delete-product.handler';
 import UpdateProductHandler from './commands/update/update-product.handler';
+import UpdateStocksCommandHandler from './commands/update-stocks/update-stocks.handler';
 import ProductController from './product.controller';
 import ProductMapping from './product.mapping';
 import ProductService from './product.service';
@@ -22,6 +23,7 @@ import ProductPublisherService from './product-events.publisher';
     CreateProductHandler,
     UpdateProductHandler,
     DeleteProductHandler,
+    UpdateStocksCommandHandler,
     ProductPublisherService,
     ProductMapping,
   ],

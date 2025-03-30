@@ -25,10 +25,13 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from "mongoose";
 import { Brand } from "./brand.schema";
+import BrandDto from "./brand.dto";
 export declare class BrandsService {
     private brandModel;
     constructor(brandModel: Model<Brand>);
     create(createBrandDto: any): Promise<Brand>;
-    findAll(): Promise<Brand[]>;
-    findById(id: string): Promise<Brand>;
+    findAll(): Promise<BrandDto[]>;
+    findById(id: string): Promise<BrandDto>;
+    findByName(name: string): Promise<Brand>;
+    update(id: string, updateBrandDto: any): Promise<Brand>;
 }

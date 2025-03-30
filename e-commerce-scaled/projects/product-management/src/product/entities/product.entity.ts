@@ -33,7 +33,7 @@ class Product {
     description: 'The stock quantity of the product',
     example: 190,
   })
-  readonly stock: number;
+  stock: number;
 
   @ApiProperty({
     type: 'Float',

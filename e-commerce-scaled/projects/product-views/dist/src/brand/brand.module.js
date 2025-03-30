@@ -20,6 +20,7 @@ BrandModule = __decorate([
         ],
         controllers: [brand_controller_1.default],
         providers: [brand_service_1.BrandsService],
+        exports: [brand_service_1.BrandsService],
     })
 ], BrandModule);
 exports.default = BrandModule;

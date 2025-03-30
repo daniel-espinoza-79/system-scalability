@@ -3,6 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Product } from "./schemas/product.schema";
 import { QueryProductDto } from "./dtos/query-product.dto";
+import OrderItem from "./dtos/order-item.dto";
 
 @Injectable()
 export class ProductsService {
@@ -45,5 +46,15 @@ export class ProductsService {
         new: true,
       })
       .exec();
+  }
+
+  async bulkUpdateStock(products: OrderItem[]): Promise<any> {
+    const bulkOps = products.map((product) => ({
+      updateOne: {
+        filter: { id: product.id },
+        update: { $set: { stock: product.stock } },
+      },
+    }));
+    return await this.productModel.bulkWrite(bulkOps);
   }
 }

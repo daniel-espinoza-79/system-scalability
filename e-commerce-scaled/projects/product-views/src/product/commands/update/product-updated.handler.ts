@@ -14,10 +14,9 @@ export class ProductUpdatedHandler
 
   async execute(command: ProductUpdatedCommand): Promise<void> {
     const { product } = command;
-    const currentProduct = await this.productService.findById(product.id);
     await this.productService.update(product.id, product);
 
-    let brand = await this.brandService.findByName(currentProduct.brand);
+    let brand = await this.brandService.findByName(product.brand);
 
     if (!brand) {
       throw new Error("Brand not found");

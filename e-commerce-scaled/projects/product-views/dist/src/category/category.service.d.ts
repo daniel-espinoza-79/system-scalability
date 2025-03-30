@@ -25,10 +25,11 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from "mongoose";
 import { Category } from "./category.schema";
+import CategoryDto from "./category.dto";
 export declare class CategoriesService {
     private categoryModel;
     constructor(categoryModel: Model<Category>);
-    create(createCategoryDto: any): Promise<Category>;
-    findAll(): Promise<Category[]>;
-    findById(id: string): Promise<Category>;
+    create(createCategoryDto: any): Promise<CategoryDto>;
+    findAll(): Promise<CategoryDto[]>;
+    findById(id: string): Promise<CategoryDto>;
 }

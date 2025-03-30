@@ -3,7 +3,9 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import PrismaService from '@/prisma/prisma.service';
 
 import CreateProductDto from './dto/create-product.dto';
+import OrderItem from './dto/order-item.dto';
 import UpdateProductDto from './dto/update-product.dto';
+import JustProduct from './entities/just-product.entity';
 import Product from './entities/product.entity';
 
 @Injectable()
@@ -145,6 +147,32 @@ class ProductService {
       }
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
+  }
+
+  async findManyByIds(ids: string[]): Promise<JustProduct[]> {
+    const products: JustProduct[] = await this.prisma.product.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+    return products;
+  }
+
+  async bulkStockUpdate(orderItems: OrderItem[]): Promise<void> {
+    const updatePromises = orderItems.map((item) =>
+      this.prisma.product.update({
+        where: { id: item.id },
+        data: {
+          stock: {
+            decrement: Number(item.stock),
+          },
+        },
+      })
+    );
+
+    await this.prisma.$transaction(updatePromises);
   }
 
   async remove(id: string): Promise<Product> {

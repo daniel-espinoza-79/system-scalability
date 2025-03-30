@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Category } from "./category.schema";
+import CategoryDto from "./category.dto";
 
 @Injectable()
 export class CategoriesService {
@@ -9,16 +10,25 @@ export class CategoriesService {
     @InjectModel(Category.name) private categoryModel: Model<Category>
   ) {}
 
-  async create(createCategoryDto: any): Promise<Category> {
+  async create(createCategoryDto: any): Promise<CategoryDto> {
     const createdCategory = new this.categoryModel(createCategoryDto);
-    return createdCategory.save();
+    let cat = await createdCategory.save();
+    return new CategoryDto(cat.id, cat.name, cat.image);
   }
 
-  async findAll(): Promise<Category[]> {
-    return await this.categoryModel.find().lean().exec();
+  async findAll(): Promise<CategoryDto[]> {
+    const categories: Category[] = await this.categoryModel
+      .find()
+      .lean()
+      .exec();
+    return categories.map((c) => new CategoryDto(c.id, c.name, c.image));
   }
 
-  async findById(id: string): Promise<Category> {
-    return  await this.categoryModel.findOne({ id: id }).lean().exec();
+  async findById(id: string): Promise<CategoryDto> {
+    const category: Category = await this.categoryModel
+      .findOne({ id: id })
+      .lean()
+      .exec();
+    return new CategoryDto(category.id, category.name, category.image);
   }
 }

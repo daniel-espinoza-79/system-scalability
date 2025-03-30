@@ -31,13 +31,18 @@ async function migrateBrandsData() {
 
     for (const row of result.rows) {
       const productQuery = `
-        SELECT p.id as product_id, p.name as product_name, p.price as product_price, 
-               c.name as category_name, array_agg(DISTINCT pi.image) as image_products
-        FROM products p
-        JOIN categories c ON p.category_id = c.id
-        JOIN product_images pi ON p.id = pi.product_id
-        GROUP BY p.id, c.name
-        LIMIT 10;
+SELECT p.id as product_id, 
+       p.name as product_name, 
+       p.price as product_price, 
+       c.name as category_name, 
+       array_agg(DISTINCT pi.image) as image_products
+FROM products p
+JOIN categories c ON p.category_id = c.id
+JOIN product_images pi ON p.id = pi.product_id
+WHERE p.brand_id = '${row.brand_id}'
+GROUP BY p.id, p.name, p.price, c.name
+LIMIT 10;
+
       `;
 
       const brandProducts = await pgClient.query(productQuery);

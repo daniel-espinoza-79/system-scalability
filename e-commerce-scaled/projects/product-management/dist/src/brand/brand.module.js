@@ -16,6 +16,7 @@ BrandModule = __decorate([
     (0, common_1.Module)({
         controllers: [brand_controller_1.default],
         providers: [brand_service_1.default, prisma_service_1.default],
+        exports: [brand_service_1.default],
     })
 ], BrandModule);
 exports.default = BrandModule;

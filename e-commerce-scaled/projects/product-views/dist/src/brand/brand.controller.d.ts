@@ -1,9 +1,9 @@
 import { BrandsService } from "./brand.service";
-import { Brand } from "./brand.schema";
+import BrandDto from "./brand.dto";
 declare class BrandController {
     private readonly brandService;
     constructor(brandService: BrandsService);
-    findAll(): Promise<Brand[]>;
-    findOne(id: string): Promise<Brand>;
+    findAll(): Promise<BrandDto[]>;
+    findOne(id: string): Promise<BrandDto>;
 }
 export default BrandController;

@@ -37,7 +37,7 @@ async function main() {
     SwaggerModule.setup(PREFIX, app, document);
   }
   await app.startAllMicroservices();
-  await app.listen(PORT);
+  await app.listen(3111);
 }
 
 main().catch((err: Error) => {

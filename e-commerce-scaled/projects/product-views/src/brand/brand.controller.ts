@@ -1,12 +1,8 @@
-import {
-  Controller,
-  Get,
-  Param,
-} from "@nestjs/common";
+import { Controller, Get, Param } from "@nestjs/common";
 import { ApiCreatedResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 import { BrandsService } from "./brand.service";
-import { Brand } from "./brand.schema";
+import BrandDto from "./brand.dto";
 
 @Controller("brands")
 @ApiTags("Brands")
@@ -15,17 +11,17 @@ class BrandController {
 
   @Get()
   @ApiOperation({ summary: "Get all brands" })
-  @ApiCreatedResponse({ type: Brand, isArray: true })
-  async findAll(): Promise<Brand[]> {
-    const brands: Brand[] = await this.brandService.findAll();
+  @ApiCreatedResponse({ type: BrandDto, isArray: true })
+  async findAll(): Promise<BrandDto[]> {
+    const brands: BrandDto[] = await this.brandService.findAll();
     return brands;
   }
 
   @Get(":id")
   @ApiOperation({ summary: "Get a brand by id" })
-  @ApiCreatedResponse({ type: Brand })
-  async findOne(@Param("id") id: string): Promise<Brand> {
-    const brand: Brand = await this.brandService.findById(id);
+  @ApiCreatedResponse({ type: BrandDto })
+  async findOne(@Param("id") id: string): Promise<BrandDto> {
+    const brand: BrandDto = await this.brandService.findById(id);
     return brand;
   }
 }

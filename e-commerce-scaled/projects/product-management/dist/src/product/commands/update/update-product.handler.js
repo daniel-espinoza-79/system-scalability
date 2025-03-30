@@ -10,19 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cqrs_1 = require("@nestjs/cqrs");
+const product_mapping_1 = require("../../product.mapping");
 const product_service_1 = require("../../product.service");
+const product_events_publisher_1 = require("../../product-events.publisher");
 const update_product_command_1 = require("./update-product.command");
 let UpdateProductHandler = class UpdateProductHandler {
-    constructor(productService) {
+    constructor(productService, mapping, publisher) {
         this.productService = productService;
+        this.mapping = mapping;
+        this.publisher = publisher;
     }
     async execute(command) {
-        return this.productService.update(command.id, command.updateProductDto);
+        await this.productService.update(command.id, command.updateProductDto);
+        const product = await this.productService.findOne(command.id);
+        this.publisher.publishProductUpdated(this.mapping.mapToSimpleProduct(product, product.category.name, product.brand.name));
+        return product;
     }
 };
 UpdateProductHandler = __decorate([
     (0, cqrs_1.CommandHandler)(update_product_command_1.default),
-    __metadata("design:paramtypes", [product_service_1.default])
+    __metadata("design:paramtypes", [product_service_1.default,
+        product_mapping_1.default,
+        product_events_publisher_1.default])
 ], UpdateProductHandler);
 exports.default = UpdateProductHandler;
 //# sourceMappingURL=update-product.handler.js.map
