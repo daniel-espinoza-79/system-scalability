@@ -1,0 +1,48 @@
+services:
+
+  # API GATEWAY
+  api-gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
+    ports:
+      - "8000:80"
+    networks:
+      examplenet:
+        ipv4_address: 172.18.0.1
+    depends_on:
+      service-1:
+        condition: service_started
+      service-2:
+        condition: service_started
+  
+  service-1:
+    container_name: service1
+    build:
+      context: .
+      dockerfile: ./service1/Dockerfile
+    environment:
+      ASPNETCORE_HTTP_PORTS: 80
+    networks:
+      examplenet:
+        ipv4_address: 172.18.0.2
+  
+  service-2:
+    container_name: service2
+    build:
+      context: .
+      dockerfile: ./service2/Dockerfile
+    environment:
+      ASPNETCORE_HTTP_PORTS: 80
+    networks:
+      examplenet:
+        ipv4_address: 172.18.0.3
+
+networks:
+  examplenet:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.18.0.0/16
+      driver: bridge
