@@ -21,10 +21,7 @@ class UserService {
           password: hashedPassword,
         },
         include: {
-          penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
+          penalty: true
         },
       });
       return user;
@@ -42,10 +39,7 @@ class UserService {
         createdAt: 'desc',
       },
       include: {
-        penalty: true,
-        wishList: true,
-        purchases: true,
-        usersProducts: true,
+        penalty: true
       },
     });
     return users;
@@ -57,10 +51,7 @@ class UserService {
         id,
       },
       include: {
-        penalty: true,
-        wishList: true,
-        purchases: true,
-        usersProducts: true,
+        penalty: true
       },
     });
 
@@ -78,10 +69,7 @@ class UserService {
         },
         data: updateUserDto,
         include: {
-          penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
+          penalty: true
         },
       });
       return user;
@@ -100,10 +88,7 @@ class UserService {
           id,
         },
         include: {
-          penalty: true,
-          wishList: true,
-          purchases: true,
-          usersProducts: true,
+          penalty: true
         },
       });
       return user;
@@ -118,10 +103,7 @@ class UserService {
         email,
       },
       include: {
-        penalty: true,
-        wishList: true,
-        purchases: true,
-        usersProducts: true,
+        penalty: true
       },
     });
 

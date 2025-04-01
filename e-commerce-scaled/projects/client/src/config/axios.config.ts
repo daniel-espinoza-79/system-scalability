@@ -36,7 +36,7 @@ instance.interceptors.response.use(
     let token = '';
 
     try {
-      const { data } = await axios.post<Auth>('/api/auth/refresh-token', {
+      const { data } = await axios.post<Auth>('/api/user-service/auth/refresh-token', {
         refreshToken,
       });
       token = data.token;

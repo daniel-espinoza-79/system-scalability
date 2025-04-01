@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "user-service",
   "prisma": {
     "seed": "ts-node ./prisma/seed.ts"
   },

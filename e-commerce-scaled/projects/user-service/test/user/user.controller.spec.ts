@@ -75,9 +75,6 @@ describe('UserController', () => {
           createdAt: new Date(),
           updatedAt: new Date(),
           penalty: null,
-          wishList: null,
-          purchases: [],
-          usersProducts: [],
         },
       ];
 

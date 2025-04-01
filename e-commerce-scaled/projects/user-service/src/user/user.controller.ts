@@ -2,9 +2,6 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@n
 import { ApiBearerAuth, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import AdminAccess from '@/auth/decorators/admin.decorator';
-import AdminGuard from '@/auth/guard/admin.guard';
-import JwtAuthGuard from '@/auth/guard/jwt.guard';
-
 import CreateUserDto from './dto/create-user.dto';
 import UpdateUserDto from './dto/update-user.dto';
 import User from './entities/user.entity';
@@ -17,7 +14,6 @@ class UserController {
 
   @Post()
   @AdminAccess()
-  @UseGuards(JwtAuthGuard, AdminGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiCreatedResponse({ type: User })
@@ -27,7 +23,6 @@ class UserController {
 
   @Get()
   @AdminAccess()
-  @UseGuards(JwtAuthGuard, AdminGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all users' })
   @ApiCreatedResponse({ type: User, isArray: true })
@@ -36,7 +31,6 @@ class UserController {
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get a user by id' })
   @ApiCreatedResponse({ type: User })
@@ -45,7 +39,6 @@ class UserController {
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update a user by id' })
   @ApiCreatedResponse({ type: User })
@@ -54,7 +47,6 @@ class UserController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Delete a user by id' })
   @ApiCreatedResponse({ type: User })
