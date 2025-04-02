@@ -17,27 +17,31 @@ class PurchasesService {
   async create(data: CreatePurchasesProductsDto) {
     const purchaseData = {
       totalCost: data.totalCost,
-      deliveyDay: data.deliveryDay,
-      deadline: data.deadline,
+      deliveyDay: new Date().toISOString(),
+      deadline: new Date().toISOString(),
       status: PurchaseStatus.PENDING,
     };
 
     const orderPurchased = await this.prisma.purchase.create({
       data: purchaseData,
     });
-
-    data.purchaseProducts.map(async (p) => {
-      this.prisma.purchasesProducts.create({
-        data: {
-          productId: p.productId,
-          quantity: p.quantity,
-          purchaseId: orderPurchased.id,
-        },
+    if (Array.isArray(data.purchaseProducts)) {
+      data.purchaseProducts.forEach(async (p) => {
+        await this.prisma.purchasesProducts.create({
+          data: {
+            productId: p.productId,
+            quantity: p.quantity,
+            purchaseId: orderPurchased.id,
+          },
+        });
       });
-    });
 
-    await this.productService.bulkStockUpdate(data.purchaseProducts.map((p) => new OrderItem(p.productId, p.quantity)));
-
+      await this.productService.bulkStockUpdate(
+        data.purchaseProducts.map((p) => new OrderItem(p.productId, p.quantity))
+      );
+    } else {
+      console.error('purchaseProducts is undefined or not an array');
+    }
     return orderPurchased;
   }
 
