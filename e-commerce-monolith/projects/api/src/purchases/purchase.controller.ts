@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 
+import CreatePurchasesProductsDto from './dto/create-purchases.dto';
 import PurchasesService from './purchase.service';
 
 @Controller('purchases')
@@ -8,7 +8,7 @@ class PurchasesController {
   constructor(private readonly purchasesService: PurchasesService) {}
 
   @Post()
-  async create(@Body() data: Prisma.PurchaseCreateInput) {
+  async create(@Body() data: CreatePurchasesProductsDto) {
     return this.purchasesService.create(data);
   }
 

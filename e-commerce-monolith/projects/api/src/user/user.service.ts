@@ -23,7 +23,6 @@ class UserService {
         include: {
           penalty: true,
           wishList: true,
-          purchases: true,
           usersProducts: true,
         },
       });
@@ -44,7 +43,6 @@ class UserService {
       include: {
         penalty: true,
         wishList: true,
-        purchases: true,
         usersProducts: true,
       },
     });
@@ -59,7 +57,6 @@ class UserService {
       include: {
         penalty: true,
         wishList: true,
-        purchases: true,
         usersProducts: true,
       },
     });
@@ -80,7 +77,6 @@ class UserService {
         include: {
           penalty: true,
           wishList: true,
-          purchases: true,
           usersProducts: true,
         },
       });
@@ -102,7 +98,6 @@ class UserService {
         include: {
           penalty: true,
           wishList: true,
-          purchases: true,
           usersProducts: true,
         },
       });
@@ -120,7 +115,6 @@ class UserService {
       include: {
         penalty: true,
         wishList: true,
-        purchases: true,
         usersProducts: true,
       },
     });

@@ -93,13 +93,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         isArray: true,
-        description: 'The purchases of the user',
-    }),
-    __metadata("design:type", Array)
-], User.prototype, "purchases", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        isArray: true,
         description: 'The users products of the user',
     }),
     __metadata("design:type", Array)

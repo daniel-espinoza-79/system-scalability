@@ -1,4 +1,4 @@
-import { Penalty, Purchase, Role, UsersProducts, WishList } from '@prisma/client';
+import { Penalty, Role, UsersProducts, WishList } from '@prisma/client';
 declare class User {
     readonly id: string;
     readonly name: string;
@@ -10,7 +10,6 @@ declare class User {
     readonly updatedAt: Date;
     readonly penalty: Penalty;
     readonly wishList: WishList;
-    readonly purchases: Purchase[];
     readonly usersProducts: UsersProducts[];
 }
 export default User;

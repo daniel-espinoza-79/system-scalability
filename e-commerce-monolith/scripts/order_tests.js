@@ -30,32 +30,17 @@ export let options = {
 
 const BASE_URL = 'http://localhost:3000/api/purchases';
 
-function generateUUID() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0,
-      v = c === "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
-
-
 export function createPurchase() {
   const payload = JSON.stringify({
     totalCost: 100.5,
     deliveyDay: new Date().toISOString(),
     deadline: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString(),
-    status: "PENDING",
-    user: {
-      connect: { id: generateUUID() },
-    },
-    purchasesProducts: {
-      create: [
-        {
-          productId: generateUUID(),
-          quantity: 2,
-        },
-      ],
-    },
+    purchasesProducts: [
+      {
+        productId: "01590964-af6d-44a0-bc92-b9960007cffd",
+        quantity: 2,
+      },
+    ],
   });
 
   const params = {
