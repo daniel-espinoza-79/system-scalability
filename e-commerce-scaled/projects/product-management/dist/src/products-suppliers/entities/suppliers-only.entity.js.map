@@ -1,1 +1,0 @@
-{"version":3,"file":"suppliers-only.entity.js","sourceRoot":"","sources":["../../../../src/products-suppliers/entities/suppliers-only.entity.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,6CAA8C;AAE9C,6EAA2D;AAE3D,MAAM,aAAa;CAMlB;AADU;IAJR,IAAA,qBAAW,EAAC;QACX,IAAI,EAAE,GAAG,EAAE,CAAC,yBAAQ;QACpB,WAAW,EAAE,6BAA6B;KAC3C,CAAC;8BACiB,yBAAQ;+CAAC;AAG9B,kBAAe,aAAa,CAAC"}
