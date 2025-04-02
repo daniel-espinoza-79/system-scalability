@@ -3,7 +3,7 @@ declare const DESCRIPTION = "The Llama Gamer E Commerce API is a RESTful API tha
 declare const ENV: string;
 declare const HASH_SALT = 10;
 declare const PORT: number;
-declare const PREFIX = "/api";
+declare const PREFIX = "/api/view";
 declare const PUBLIC_KEY = "public";
 declare const TITLE = "The Llama Gamer E Commerce API";
 declare const VERSION = "1.0";
