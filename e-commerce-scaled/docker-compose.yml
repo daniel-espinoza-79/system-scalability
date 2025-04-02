@@ -33,6 +33,16 @@ services:
       - postgres-users-db:/var/lib/postgresql/data
       - ./scripts/init-users.sql:/docker-entrypoint-initdb.d/init.sql
 
+  api-gateway:
+    container_name: gateway
+    build:
+      context: ./projects/
+      dockerfile: ./gateway/Dockerfile
+    network_mode: "host"
+    environment:
+      - NGINX_PORT=8000
+
+
   pgadmin:
     image: dpage/pgadmin4:7.8
     container_name: llama_gamer_pgadmin
