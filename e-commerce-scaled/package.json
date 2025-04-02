@@ -43,10 +43,10 @@
   ],
   "license": "MIT",
   "workspaces": [
-    "projects/api",
+    "projects/user-service",
     "projects/client"
   ],
-  "main": "projects/api/dist/src/main.js",
+  "main": "projects/user-service/dist/src/main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SoftDevIV-US/llama-gamer.git"
@@ -67,16 +67,16 @@
     "access": "public"
   },
   "prisma": {
-    "schema": "./projects/api/prisma/schema.prisma"
+    "schema": "./projects/user-service/prisma/schema.prisma"
   },
   "scripts": {
-    "postinstall": "pnpm -F=api prisma:generate",
-    "dev": "docker compose down && docker volume rm --force llama-gamer_postgres-data && docker compose up -d && pnpm -F=api prisma && pnpm --parallel dev",
+    "postinstall": "pnpm -F=user-service prisma:generate",
+    "dev": "docker compose down && docker volume rm --force llama-gamer_postgres-data && docker compose up -d && pnpm -F=user-service prisma && pnpm --parallel dev",
     "check:code": "pnpm --parallel lint && pnpm --parallel format",
     "test": "pnpm --parallel test",
     "build": "pnpm --parallel build",
-    "start": "node projects/api/dist/src/main.js",
-    "start:dev": "DATABASE_URL=\"postgresql://user:password@localhost:3030/llama_gamer_db\" node projects/api/dist/src/main.js"
+    "start": "node projects/user-service/dist/src/main.js",
+    "start:dev": "DATABASE_URL=\"postgresql://user:password@localhost:3030/llama_gamer_db\" node projects/user-service/dist/src/main.js"
   },
   "devDependencies": {
   }

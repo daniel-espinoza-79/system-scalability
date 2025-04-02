@@ -16,7 +16,7 @@ const useLoadProducts = ({ setIsLoading }: Props) => {
     const loadBrands = async () => {
       const response = await getAllBrands();
       if (response.length === 0) return;
-      const randomBrands = response.sort(() => Math.random() - Math.random()).slice(0, Math.min(2, response.length));
+      const randomBrands = response.sort(() => Math.random() - Math.random()).slice(0, Math.min(3, response.length));
 
       const result = randomBrands.map((brand) => ({
         ...brand,

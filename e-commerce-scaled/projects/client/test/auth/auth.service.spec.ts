@@ -16,7 +16,7 @@ describe('sendLoginRequest', () => {
 
     const result = await sendLoginRequest(email, password);
 
-    expect(mockAxiosPost).toHaveBeenCalledWith('/api/auth/login', { email, password });
+    expect(mockAxiosPost).toHaveBeenCalledWith('/api/user-service/auth/login', { email, password });
     expect(result).toEqual(responseData);
   });
 });

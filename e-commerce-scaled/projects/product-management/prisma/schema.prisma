@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Country {
+  id        String     @id @default(uuid()) @db.Uuid()
+  name      String     @unique @db.Citext
+  tax       Float
+  createdAt DateTime   @default(now()) @map(name: "created_at") @db.Timestamptz()
+  updatedAt DateTime   @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
+  suppliers Supplier[]
+
+  @@map(name: "countries")
+}
+
+model Category {
+  id        String    @id @default(uuid()) @db.Uuid()
+  name      String    @unique @db.Citext
+  image     String
+  createdAt DateTime  @default(now()) @map(name: "created_at") @db.Timestamptz()
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "update_at") @db.Timestamptz()
+  products  Product[]
+
+  @@map(name: "categories")
+}
+
+model Brand {
+  id        String    @id @default(uuid()) @db.Uuid()
+  name      String    @unique @db.Citext
+  logo      String
+  createdAt DateTime  @default(now()) @map(name: "created_at") @db.Timestamptz()
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
+  products  Product[]
+
+  @@map(name: "brands")
+}
+
+model Supplier {
+  id                String              @id @default(uuid()) @db.Uuid()
+  email             String              @unique @db.Citext
+  deliveryTime      Int                 @map(name: "delivery_time")
+  createdAt         DateTime            @default(now()) @map(name: "created_at") @db.Timestamptz()
+  updatedAt         DateTime            @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
+  countryId         String              @map(name: "country_id") @db.Uuid()
+  country           Country             @relation(fields: [countryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  productsSuppliers ProductsSuppliers[]
+
+  @@map(name: "suppliers")
+}
+
+
+model Product {
+  id                String              @id @default(uuid()) @db.Uuid()
+  name              String              @unique @db.Citext
+  description       String              @default("")
+  stock             Int
+  price             Float
+  isAvailable       Boolean             @default(true) @map(name: "is_available")
+  createdAt         DateTime            @default(now()) @map(name: "created_at") @db.Timestamptz()
+  updatedAt         DateTime            @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
+  categoryId        String              @map(name: "category_id") @db.Uuid()
+  brandId           String              @map(name: "brand_id") @db.Uuid()
+  category          Category            @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  brand             Brand               @relation(fields: [brandId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  productImages     ProductImage[]
+  productsSuppliers ProductsSuppliers[]
+
+  @@map(name: "products")
+}
+
+model ProductImage {
+  id        String   @id @default(uuid()) @db.Uuid()
+  image     String
+  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
+  updatedAt DateTime @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
+  productId String   @map(name: "product_id") @db.Uuid()
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map(name: "product_images")
+}
+
+model ProductsSuppliers {
+  productId  String   @map(name: "product_id") @db.Uuid()
+  supplierId String   @map(name: "supplier_id") @db.Uuid()
+  createdAt  DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@id([productId, supplierId])
+  @@map(name: "products_suppliers")
+}
+
+

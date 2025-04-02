@@ -32,6 +32,28 @@ services:
     depends_on:
       - postgres
 
+
+  mongodb:
+    image: mongo:latest
+    container_name: llama_gamer_mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: productsdb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+
+  nats:
+    image: nats:latest
+    container_name: nats
+    ports:
+      - "4222:4222"
+    restart: always
+
 volumes:
   pgadmin-data:
   postgres-data:
+  mongodb-data:

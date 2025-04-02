@@ -1,0 +1,49 @@
+# Dependencias y paquetes
+node_modules/
+.pnpm-store/
+
+# Entorno y variables de entorno
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# Builds y compilación
+dist/
+*.tsbuildinfo
+
+# Prisma (ignorar bases de datos locales)
+*.db
+*.db-journal
+
+# Testing y cobertura
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Directorios temporales
+temp/
+tmp/
+
+# Otros
+.cache/
+*.bak
