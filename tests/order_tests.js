@@ -6,8 +6,8 @@ export let options = {
   scenarios: {
     create_purchase: {
       executor: 'per-vu-iterations',
-      vus: 50,         // 50 VUs * 10 iterations = 500 requests of creation
-      iterations: 10,
+      vus: 80,         // 80 VUs * 35 iterations = 2800 requests of creation
+      iterations: 35,
       maxDuration: '1m',
       exec: 'createPurchase',
     },
@@ -28,7 +28,7 @@ export let options = {
   },
 };
 
-const BASE_URL = 'http://localhost:3000/purchases';
+const BASE_URL = 'http://172.20.41.8:8000/purchases';
 
 function generateObjectId() {
     let objectId = '';

@@ -6,8 +6,8 @@ export let options = {
   scenarios: {
     create_purchase: {
       executor: 'per-vu-iterations',
-      vus: 50,         // 50 VUs * 10 iterations = 500 requests of creation
-      iterations: 10,
+      vus: 80,         // 80 VUs * 35 iterations = 2800 requests of creation
+      iterations: 35,
       maxDuration: '1m',
       exec: 'createPurchase',
     },
@@ -35,9 +35,9 @@ export function createPurchase() {
     totalCost: 100.5,
     deliveyDay: new Date().toISOString(),
     deadline: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString(),
-    purchasesProducts: [
+    purchaseProducts: [
       {
-        productId: "01590964-af6d-44a0-bc92-b9960007cffd",
+        productId: "01e33cf1-3390-4243-ba71-e051faf0b424",
         quantity: 2,
       },
     ],
