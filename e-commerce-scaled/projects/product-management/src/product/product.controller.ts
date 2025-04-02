@@ -47,6 +47,11 @@ class ProductController {
     await this.commandBus.execute(new UpdateStocksCommand(orderItems));
   }
 
+  @Post('completed')
+  async completeOrrder(@Body() orderItems: OrderItem[]) {
+    await this.commandBus.execute(new UpdateStocksCommand(orderItems));
+  }
+
   @Post('test')
   async test() {
     this.publisher.publishUpdates([
