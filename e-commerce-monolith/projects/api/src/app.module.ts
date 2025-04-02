@@ -12,6 +12,7 @@ import ProductModule from './product/product.module';
 import ProductsSuppliersModule from './products-suppliers/products-suppliers.module';
 import SupplierModule from './supplier/supplier.module';
 import UserModule from './user/user.module';
+import PurchasesModule from './purchases/purchase.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import UserModule from './user/user.module';
     ProductModule,
     ProductImageModule,
     ProductsSuppliersModule,
+    PurchasesModule,
   ],
 })
 class AppModule {}

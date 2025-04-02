@@ -75,7 +75,6 @@ model User {
   updatedAt     DateTime        @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
   penalty       Penalty?
   wishList      WishList?
-  purchases     Purchase[]
   usersProducts UsersProducts[]
 
   @@map(name: "users")
@@ -113,8 +112,6 @@ model Purchase {
   status            PurchaseStatus
   createdAt         DateTime            @default(now()) @map(name: "created_at") @db.Timestamptz()
   updatedAt         DateTime            @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
-  userId            String              @map(name: "user_id") @db.Uuid()
-  user              User                @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   purchasesProducts PurchasesProducts[]
 
   @@map(name: "purchases")
@@ -137,8 +134,6 @@ model Product {
   productsSuppliers ProductsSuppliers[]
   wishListsProducts WishListsProducts[]
   usersProducts     UsersProducts[]
-  purchasesProducts PurchasesProducts[]
-
   @@map(name: "products")
 }
 
@@ -191,13 +186,11 @@ model UsersProducts {
 
 model PurchasesProducts {
   purchaseId String   @map(name: "purchase_id") @db.Uuid()
-  productId  String   @map(name: "product_id") @db.Uuid()
+  productId  String
   quantity   Int
   createdAt  DateTime @default(now()) @map(name: "created_at") @db.Timestamptz()
   updatedAt  DateTime @default(now()) @updatedAt @map(name: "updated_at") @db.Timestamptz()
   purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-
   @@id([purchaseId, productId])
   @@map(name: "purchases_products")
 }
