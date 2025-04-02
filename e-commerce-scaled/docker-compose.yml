@@ -1,12 +1,12 @@
 version: "3.8"
 
 services:
-  postgres:
+  postgres-products:
     image: postgres:16.0
-    container_name: llama_gamer_postgres
+    container_name: llama_gamer_postgres_products
     restart: always
     environment:
-      POSTGRES_DB: llama_gamer_db
+      POSTGRES_DB: productsdb
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       TZ: "UTC-4"
@@ -15,7 +15,23 @@ services:
     command: -p 3030
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./scripts/init.pgsql:/docker-entrypoint-initdb.d/1.sql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  postgres-users:
+    image: postgres:16.0
+    container_name: llama_gamer_postgres_users
+    restart: always
+    environment:
+      POSTGRES_DB: usersdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      TZ: "UTC-4"
+    ports:
+      - 5437:5437
+    command: -p 5437
+    volumes:
+      - postgres-users-db:/var/lib/postgresql/data
+      - ./scripts/init-users.sql:/docker-entrypoint-initdb.d/init.sql
 
   pgadmin:
     image: dpage/pgadmin4:7.8
@@ -29,8 +45,6 @@ services:
       - 4040:4040
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - postgres
 
 
   mongodb:
@@ -57,3 +71,4 @@ volumes:
   pgadmin-data:
   postgres-data:
   mongodb-data:
+  postgres-users-db:
