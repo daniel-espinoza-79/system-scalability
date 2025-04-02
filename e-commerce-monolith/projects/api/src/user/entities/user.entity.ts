@@ -71,12 +71,6 @@ class User {
 
   @ApiProperty({
     isArray: true,
-    description: 'The purchases of the user',
-  })
-  readonly purchases: Purchase[];
-
-  @ApiProperty({
-    isArray: true,
     description: 'The users products of the user',
   })
   readonly usersProducts: UsersProducts[];

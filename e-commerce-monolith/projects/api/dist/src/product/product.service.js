@@ -151,6 +151,17 @@ let ProductService = class ProductService {
             throw new common_1.NotFoundException(`Product with ID ${id} not found`);
         }
     }
+    async bulkStockUpdate(orderItems) {
+        const updatePromises = orderItems.map((item) => this.prisma.product.update({
+            where: { id: item.id },
+            data: {
+                stock: {
+                    decrement: Number(item.stock),
+                },
+            },
+        }));
+        await this.prisma.$transaction(updatePromises);
+    }
     async remove(id) {
         try {
             const product = await this.prisma.product.delete({

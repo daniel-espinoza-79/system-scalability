@@ -8,5 +8,6 @@ import ProductService from './product.service';
 @Module({
   controllers: [ProductController],
   providers: [ProductService, PrismaService],
+  exports: [ProductService],
 })
 export default class ProductModule {}

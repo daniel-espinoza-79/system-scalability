@@ -28,7 +28,6 @@ let UserService = class UserService {
                 include: {
                     penalty: true,
                     wishList: true,
-                    purchases: true,
                     usersProducts: true,
                 },
             });
@@ -49,7 +48,6 @@ let UserService = class UserService {
             include: {
                 penalty: true,
                 wishList: true,
-                purchases: true,
                 usersProducts: true,
             },
         });
@@ -63,7 +61,6 @@ let UserService = class UserService {
             include: {
                 penalty: true,
                 wishList: true,
-                purchases: true,
                 usersProducts: true,
             },
         });
@@ -82,7 +79,6 @@ let UserService = class UserService {
                 include: {
                     penalty: true,
                     wishList: true,
-                    purchases: true,
                     usersProducts: true,
                 },
             });
@@ -104,7 +100,6 @@ let UserService = class UserService {
                 include: {
                     penalty: true,
                     wishList: true,
-                    purchases: true,
                     usersProducts: true,
                 },
             });
@@ -122,7 +117,6 @@ let UserService = class UserService {
             include: {
                 penalty: true,
                 wishList: true,
-                purchases: true,
                 usersProducts: true,
             },
         });

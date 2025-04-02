@@ -9,7 +9,7 @@ declare const JWT_SECRET: string;
 declare const NAME_VALIDATOR: RegExp;
 declare const PASSWORD_VALIDATOR: RegExp;
 declare const PRODUCT_NAME_VALIDATOR: RegExp;
-declare const PORT: number;
+declare const PORT = 3000;
 declare const PREFIX = "/api";
 declare const PUBLIC_KEY = "public";
 declare const TITLE = "The Llama Gamer E Commerce API";
